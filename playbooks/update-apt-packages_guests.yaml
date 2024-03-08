@@ -1,6 +1,8 @@
 - name: Update Guests
+  hosts: all
   tasks:
     - name: Update and upgrade
       apt:
         update_cache: yes
         upgrade: yes
+        cache_valid_timer: 86400 #One day
