@@ -3,7 +3,7 @@
   tasks:
     - name: Update and upgrade
       become_user: ansible
-      become: yes
+      become: 'yes'
       apt:
         update_cache: 'true'
         cache_valid_time: 3600
