@@ -2,7 +2,6 @@
   hosts: all
   tasks:
     - name: Update and upgrade
-      become_user: ansible
       become: 'yes'
       apt:
         update_cache: 'true'
