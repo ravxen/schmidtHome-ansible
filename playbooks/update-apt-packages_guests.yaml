@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - name: Update and upgrade
-      become_user: ansibl'
+      become_user: ansible
       become_method: sudo
       become: 'true'
       apt:
