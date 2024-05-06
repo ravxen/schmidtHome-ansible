@@ -1,4 +1,4 @@
-task:
+tasks:
   - name: Update, upgrade and reboot (if required) system\
     block: 
       - name: Update and upgrade
