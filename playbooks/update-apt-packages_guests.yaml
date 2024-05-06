@@ -1,20 +1,19 @@
 task:
   - name: Update, upgrade and reboot (if required) system\
     block: 
-      - name: Update Guests
-          - name: Update and upgrade
-            apt:
-              update_cache: true
-              cache_valid_time: 3600
-              upgrade: dist
+      - name: Update and upgrade
+        apt:
+          update_cache: true
+          cache_valid_time: 3600
+          upgrade: dist
 
-          - name: Check if reboot required
-            stat:
-              path: /var/run/reboot-required
-            register: reboot_required_file
-            
-          - name: Reboot if required
-            reboot:
-            when: reboot_required_file.stat.exists == true
+      - name: Check if reboot required
+        stat:
+          path: /var/run/reboot-required
+        register: reboot_required_file
+
+      - name: Reboot if required
+        reboot:
+        when: reboot_required_file.stat.exists == true
     hosts: all
     become: true
