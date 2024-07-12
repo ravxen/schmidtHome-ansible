@@ -1,7 +1,0 @@
-- name: Update Proxmox Nodes
-  hosts: all
-  tasks:
-    - name: Update and upgrade
-      apt:
-        update_cache: yes
-        upgrade: dist
