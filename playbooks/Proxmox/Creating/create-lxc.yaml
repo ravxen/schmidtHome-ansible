@@ -1,20 +1,21 @@
-- name: Update alle LXC's system
-  hosts: all
+- name: Create LXC
+  hosts: proxmox
+  become: true
   tasks:
-    - name: apt update & apt upgrade
-      block: 
-        - name: Update and upgrade
-          apt:
-            update_cache: true
-            cache_valid_time: 3600
-            upgrade: dist
-
-        - name: Check if reboot required
-          stat:
-            path: /var/run/reboot-required
-          register: reboot_required_file
-
-        - name: Reboot if required
-          reboot:
-          when: reboot_required_file.stat.exists == true
-      become: true
+    - name: Create container for PVE
+      community.general.proxmox:
+        node: 
+        api_user: "ansible@pam"
+        api_token_id: "ansible@pam!ansible_deployment"
+        api_token_secret: "abfa2084-c96d-4c0c-b0ca-0e084e2d4a8d"
+        api_host:
+        password: test1234
+        hostname: "ansible-test"
+        unprivileged: true
+        cores: 1
+        cpus: 1
+        memory: 2048
+        swap: 1024
+        ostemplate: "local:vztmpl/debian-12-standard_12.2-1_amd64.tar.zst"
+        disk: "machines:20"
+        netif: '{"net0":"name=etha0,gw=192.168.178.1,ip=192.168.0.1/24,bridge=vmbr0"}'
